@@ -1,38 +1,28 @@
 package com.gildedrose;
 
-import com.gildedrose.model.Item;
 import com.gildedrose.lifecycle.ItemLifecycleUpdater;
+import com.gildedrose.model.Item;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
-import java.util.stream.Stream;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
-import org.junit.jupiter.api.function.Executable;
-
+import static com.gildedrose.constant.ItemsNameConstant.*;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class ItemLifecycleUpdaterTest {
+class ItemLifecycleGoldenMasterTest {
 
     private Item[] items;
 
     @BeforeEach
     void setUpItems() {
-        this.items = new Item[]{
-            new Item("+5 Dexterity Vest", 10, 20),
-            new Item("Aged Brie", 2, 0),
-            new Item("Elixir of the Mongoose", 5, 7),
-            new Item("Sulfuras, Hand of Ragnaros", 0, 80),
-            new Item("Sulfuras, Hand of Ragnaros", -1, 80),
-            new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20),
-            new Item("Backstage passes to a TAFKAL80ETC concert", 10, 49),
-            new Item("Backstage passes to a TAFKAL80ETC concert", 5, 49),
-            new Item("Conjured Mana Cake", 3, 6)
-        };
+        this.items = SetUpHelperTest.setUpItems();
     }
 
     /**
@@ -66,13 +56,14 @@ class ItemLifecycleUpdaterTest {
 
     /**
      * Set up all expected values for all items.
+     *
      * @return number of days and a list of items with their expected sell-in and quality values for
      * each day consequentially.
      */
     private static Stream<Arguments> expectedItemValuesToDayProvider() {
         return Stream.of(
             Arguments.of(30, List.of(
-                new TestItem("+5 Dexterity Vest",
+                new TestItem(DEXTERITY_VEST,
                     new int[]{
                         9, 8, 7, 6, 5, 4, 3, 2, 1, 0,
                         -1, -2, -3, -4, -5, -6, -7, -8, -9, -10,
@@ -83,7 +74,7 @@ class ItemLifecycleUpdaterTest {
                         0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
                 ),
 
-                new TestItem("Aged Brie",
+                new TestItem(AGED_BRIE,
                     new int[]{
                         1, 0, -1, -2, -3, -4, -5, -6, -7, -8,
                         -9, -10, -11, -12, -13, -14, -15, -16, -17, -18,
@@ -94,7 +85,7 @@ class ItemLifecycleUpdaterTest {
                         40, 42, 44, 46, 48, 50, 50, 50, 50, 50}
                 ),
 
-                new TestItem("Elixir of the Mongoose",
+                new TestItem(ELIXIR_OF_THE_MONGOOSE,
                     new int[]{
                         4, 3, 2, 1, 0, -1, -2, -3, -4, -5,
                         -6, -7, -8, -9, -10, -11, -12, -13, -14, -15,
@@ -105,7 +96,7 @@ class ItemLifecycleUpdaterTest {
                         0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
                 ),
 
-                new TestItem("Sulfuras, Hand of Ragnaros",
+                new TestItem(SULFURAS,
                     new int[]{
                         0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                         0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -116,7 +107,7 @@ class ItemLifecycleUpdaterTest {
                         80, 80, 80, 80, 80, 80, 80, 80, 80, 80}
                 ),
 
-                new TestItem("Sulfuras, Hand of Ragnaros",
+                new TestItem(SULFURAS,
                     new int[]{
                         -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
                         -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
@@ -127,7 +118,7 @@ class ItemLifecycleUpdaterTest {
                         80, 80, 80, 80, 80, 80, 80, 80, 80, 80}
                 ),
 
-                new TestItem("Backstage passes to a TAFKAL80ETC concert",
+                new TestItem(BACKSTAGE_PASSES,
                     new int[]{
                         14, 13, 12, 11, 10, 9, 8, 7, 6, 5,
                         4, 3, 2, 1, 0, -1, -2, -3, -4, -5,
@@ -138,7 +129,7 @@ class ItemLifecycleUpdaterTest {
                         0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
                 ),
 
-                new TestItem("Backstage passes to a TAFKAL80ETC concert",
+                new TestItem(BACKSTAGE_PASSES,
                     new int[]{
                         9, 8, 7, 6, 5, 4, 3, 2, 1, 0,
                         -1, -2, -3, -4, -5, -6, -7, -8, -9, -10,
@@ -149,7 +140,7 @@ class ItemLifecycleUpdaterTest {
                         0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
                 ),
 
-                new TestItem("Backstage passes to a TAFKAL80ETC concert",
+                new TestItem(BACKSTAGE_PASSES,
                     new int[]{
                         4, 3, 2, 1, 0, -1, -2, -3, -4, -5,
                         -6, -7, -8, -9, -10, -11, -12, -13, -14, -15,
@@ -160,7 +151,7 @@ class ItemLifecycleUpdaterTest {
                         0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
                 ),
 
-                new TestItem("Conjured Mana Cake",
+                new TestItem(CONJURED_MANA_CAKE,
                     new int[]{
                         2, 1, 0, -1, -2, -3, -4, -5, -6, -7,
                         -8, -9, -10, -11, -12, -13, -14, -15, -16, -17,

@@ -44,8 +44,9 @@ jacocoTestCoverageVerification {
     executionData(test)
     violationRules {
         rule {
+            includes = ['com/gildedrose/lifecycle/**']
             limit {
-                minimum = 0.80
+                minimum = 1
             }
         }
     }

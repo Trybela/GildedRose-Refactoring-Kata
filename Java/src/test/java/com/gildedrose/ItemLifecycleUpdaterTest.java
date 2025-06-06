@@ -1,5 +1,7 @@
 package com.gildedrose;
 
+import com.gildedrose.model.Item;
+import com.gildedrose.lifecycle.ItemLifecycleUpdater;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -14,7 +16,7 @@ import org.junit.jupiter.api.function.Executable;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class GildedRoseTest {
+class ItemLifecycleUpdaterTest {
 
     private Item[] items;
 
@@ -38,13 +40,13 @@ class GildedRoseTest {
      */
     @ParameterizedTest(name = "Validate inventory after {0} days")
     @MethodSource("expectedItemValuesToDayProvider")
-    void inventory_matches_expectations_after_days(int days, List<TestItem> expectations) {
-        GildedRose app = new GildedRose(items);
+    void inventoryMatchesExpectationsAfterDays(int days, List<TestItem> expectations) {
+        ItemLifecycleUpdater app = new ItemLifecycleUpdater(items);
 
         // Update quality & Assert – day‑by‑day
         for (int day = 0; day < days; day++) {
 
-            app.updateQuality();
+            app.processDailyChange();
 
             final int idx = day;
             assertAll("Day " + (idx + 1),
@@ -62,6 +64,11 @@ class GildedRoseTest {
         assertEquals(expectedItem.qualityArray()[day], actualItem.quality);
     }
 
+    /**
+     * Set up all expected values for all items.
+     * @return number of days and a list of items with their expected sell-in and quality values for
+     * each day consequentially.
+     */
     private static Stream<Arguments> expectedItemValuesToDayProvider() {
         return Stream.of(
             Arguments.of(30, List.of(

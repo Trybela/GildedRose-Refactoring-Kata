@@ -42,7 +42,7 @@ class ItemLifecycleGoldenMasterTest {
             assertAll("Day " + (idx + 1),
                 IntStream.range(0, expectations.size())
                     .mapToObj(i -> (Executable) () ->
-                        assertItem(idx, app.items[i], expectations.get(i)))
+                        assertItem(idx, app.getItem(i), expectations.get(i)))
                     .toArray(Executable[]::new)
             );
         }

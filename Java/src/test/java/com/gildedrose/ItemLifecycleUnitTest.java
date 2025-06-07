@@ -19,7 +19,7 @@ public class ItemLifecycleUnitTest {
 
         app.processDailyChange();
 
-        assertEquals(app.items[0].quality, QUALITY - 1);
+        assertEquals(app.getItem(0).quality, QUALITY - 1);
     }
 
     @Test
@@ -27,7 +27,7 @@ public class ItemLifecycleUnitTest {
         var app = new ItemLifecycleUpdater(new Item[]{new Item(DEFAULT_ITEM, 0, QUALITY)});
 
         app.processDailyChange();
-        assertEquals(app.items[0].quality, QUALITY - 2);
+        assertEquals(app.getItem(0).quality, QUALITY - 2);
     }
 
     @Test
@@ -35,7 +35,7 @@ public class ItemLifecycleUnitTest {
         var app = new ItemLifecycleUpdater(new Item[]{new Item(DEFAULT_ITEM, SELL_IN, 0)});
 
         app.processDailyChange();
-        assertEquals(app.items[0].quality, 0);
+        assertEquals(app.getItem(0).quality, 0);
     }
 
     @Test
@@ -43,7 +43,7 @@ public class ItemLifecycleUnitTest {
         var app = new ItemLifecycleUpdater(new Item[]{new Item(AGED_BRIE, SELL_IN, QUALITY)});
 
         app.processDailyChange();
-        assertEquals(app.items[0].quality, QUALITY + 1);
+        assertEquals(app.getItem(0).quality, QUALITY + 1);
     }
 
     @Test
@@ -51,7 +51,7 @@ public class ItemLifecycleUnitTest {
         var app = new ItemLifecycleUpdater(new Item[]{new Item(AGED_BRIE, SELL_IN, 50)});
 
         app.processDailyChange();
-        assertEquals(app.items[0].quality, 50);
+        assertEquals(app.getItem(0).quality, 50);
     }
 
     @Test
@@ -59,8 +59,8 @@ public class ItemLifecycleUnitTest {
         var app = new ItemLifecycleUpdater(new Item[]{new Item(SULFURAS, SELL_IN, QUALITY)});
 
         app.processDailyChange();
-        assertEquals(app.items[0].sellIn, SELL_IN);
-        assertEquals(app.items[0].quality, QUALITY);
+        assertEquals(app.getItem(0).sellIn, SELL_IN);
+        assertEquals(app.getItem(0).quality, QUALITY);
     }
 
     @Test
@@ -68,7 +68,7 @@ public class ItemLifecycleUnitTest {
         var app = new ItemLifecycleUpdater(new Item[]{new Item(BACKSTAGE_PASSES, 11, QUALITY)});
 
         app.processDailyChange();
-        assertEquals(app.items[0].quality, QUALITY + 1);
+        assertEquals(app.getItem(0).quality, QUALITY + 1);
     }
 
     @Test
@@ -76,7 +76,7 @@ public class ItemLifecycleUnitTest {
         var app = new ItemLifecycleUpdater(new Item[]{new Item(BACKSTAGE_PASSES, 10, QUALITY)});
 
         app.processDailyChange();
-        assertEquals(app.items[0].quality, QUALITY + 2);
+        assertEquals(app.getItem(0).quality, QUALITY + 2);
     }
 
     @Test
@@ -84,7 +84,7 @@ public class ItemLifecycleUnitTest {
         var app = new ItemLifecycleUpdater(new Item[]{new Item(BACKSTAGE_PASSES, 5, QUALITY)});
 
         app.processDailyChange();
-        assertEquals(app.items[0].quality, QUALITY + 3);
+        assertEquals(app.getItem(0).quality, QUALITY + 3);
     }
 
     @Test
@@ -92,7 +92,7 @@ public class ItemLifecycleUnitTest {
         var app = new ItemLifecycleUpdater(new Item[]{new Item(BACKSTAGE_PASSES, 0, QUALITY)});
 
         app.processDailyChange();
-        assertEquals(app.items[0].quality, 0);
+        assertEquals(app.getItem(0).quality, 0);
     }
 
     @Test
@@ -100,7 +100,7 @@ public class ItemLifecycleUnitTest {
         var app = new ItemLifecycleUpdater(new Item[]{new Item(CONJURED_MANA_CAKE, SELL_IN, QUALITY)});
 
         app.processDailyChange();
-        assertEquals(app.items[0].quality, QUALITY - 2);
+        assertEquals(app.getItem(0).quality, QUALITY - 2);
     }
 
     @Test
@@ -108,6 +108,6 @@ public class ItemLifecycleUnitTest {
         var app = new ItemLifecycleUpdater(new Item[]{new Item(CONJURED_MANA_CAKE, 0, QUALITY)});
 
         app.processDailyChange();
-        assertEquals(app.items[0].quality, QUALITY - 4);
+        assertEquals(app.getItem(0).quality, QUALITY - 4);
     }
 }

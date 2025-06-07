@@ -1,15 +1,16 @@
 package com.gildedrose.lifecycle;
 
 import com.gildedrose.model.Item;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 import static com.gildedrose.constant.ItemsNameConstant.*;
 
+@Getter
+@RequiredArgsConstructor
 public class ItemLifecycleUpdater {
-    public Item[] items;
 
-    public ItemLifecycleUpdater(Item[] items) {
-        this.items = items;
-    }
+    private final Item[] items;
 
     public void processDailyChange() {
         for (Item item : items) {
@@ -68,5 +69,9 @@ public class ItemLifecycleUpdater {
 
     private void decreaseQuality(Item item) {
         if (item.quality > 0) item.quality--;
+    }
+
+    public Item getItem(int index) {
+        return items[index];
     }
 }

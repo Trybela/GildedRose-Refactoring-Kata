@@ -61,4 +61,36 @@ public class ItemLifecycleUpdater {
             }
         }
     }
+
+    private void updateAgedBrie(Item item) {
+        increaseQuality(item);
+        if (item.sellIn < 0) increaseQuality(item);
+    }
+
+    private void updateBackstagePass(Item item) {
+        increaseQuality(item);
+        if (item.sellIn < 10) increaseQuality(item);
+        if (item.sellIn < 5) increaseQuality(item);
+
+        if (item.sellIn < 0) {
+            item.quality = 0;
+        }
+    }
+
+    private void updateDefaultItem(Item item) {
+        decreaseQuality(item);
+        if (item.sellIn < 0) decreaseQuality(item);
+    }
+
+    private void updateSulfurasItem(Item item) {
+        return;
+    }
+
+    private void increaseQuality(Item item) {
+        if (item.quality < 50) item.quality++;
+    }
+
+    private void decreaseQuality(Item item) {
+        if (item.quality > 0) item.quality--;
+    }
 }

@@ -18,47 +18,16 @@ public class ItemLifecycleUpdater {
     }
 
     private void processItemDailyChange(Item item) {
-        if (!item.name.equals(AGED_BRIE) && !item.name.equals(BACKSTAGE_PASSES)) {
-            if (item.quality > 0 && !item.name.equals(SULFURAS)) {
-                item.quality = item.quality - 1;
-            }
-        } else {
-            if (item.quality < 50) {
-                item.quality = item.quality + 1;
-
-                if (item.name.equals(BACKSTAGE_PASSES)) {
-                    if (item.sellIn < 11 && item.quality < 50) {
-                        item.quality = item.quality + 1;
-                    }
-
-                    if (item.quality < 50 && item.sellIn < 6) {
-                        item.quality = item.quality + 1;
-
-                    }
-                }
-            }
-        }
-
         if (!item.name.equals(SULFURAS)) {
-            item.sellIn = item.sellIn - 1;
+            item.sellIn--;
         }
 
-        if (item.sellIn < 0) {
-            if (!item.name.equals(AGED_BRIE)) {
-                if (!item.name.equals(BACKSTAGE_PASSES)) {
-                    if (item.quality > 0) {
-                        if (!item.name.equals(SULFURAS)) {
-                            item.quality = item.quality - 1;
-                        }
-                    }
-                } else {
-                    item.quality = 0;
-                }
-            } else {
-                if (item.quality < 50) {
-                    item.quality = item.quality + 1;
-                }
-            }
+        if (item.name.equals(AGED_BRIE)) {
+            updateAgedBrie(item);
+        } else if (item.name.equals(BACKSTAGE_PASSES)) {
+            updateBackstagePass(item);
+        } else if (!item.name.equals(SULFURAS)) {
+            updateDefaultItem(item);
         }
     }
 
@@ -80,10 +49,6 @@ public class ItemLifecycleUpdater {
     private void updateDefaultItem(Item item) {
         decreaseQuality(item);
         if (item.sellIn < 0) decreaseQuality(item);
-    }
-
-    private void updateSulfurasItem(Item item) {
-        return;
     }
 
     private void increaseQuality(Item item) {

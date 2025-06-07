@@ -26,6 +26,8 @@ public class ItemLifecycleUpdater {
             updateAgedBrie(item);
         } else if (item.name.equals(BACKSTAGE_PASSES)) {
             updateBackstagePass(item);
+        } else if (item.name.equals(CONJURED_MANA_CAKE)) {
+            updateConjuredItem(item);
         } else if (!item.name.equals(SULFURAS)) {
             updateDefaultItem(item);
         }
@@ -49,6 +51,15 @@ public class ItemLifecycleUpdater {
     private void updateDefaultItem(Item item) {
         decreaseQuality(item);
         if (item.sellIn < 0) decreaseQuality(item);
+    }
+
+    private void updateConjuredItem(Item item) {
+        decreaseQuality(item);
+        decreaseQuality(item);
+        if (item.sellIn < 0) {
+            decreaseQuality(item);
+            decreaseQuality(item);
+        }
     }
 
     private void increaseQuality(Item item) {

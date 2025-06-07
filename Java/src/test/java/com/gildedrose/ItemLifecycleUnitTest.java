@@ -94,4 +94,20 @@ public class ItemLifecycleUnitTest {
         app.processDailyChange();
         assertEquals(app.items[0].quality, 0);
     }
+
+    @Test
+    public void qualityConjuredDegradeTwiceFast() {
+        var app = new ItemLifecycleUpdater(new Item[]{new Item(CONJURED_MANA_CAKE, SELL_IN, QUALITY)});
+
+        app.processDailyChange();
+        assertEquals(app.items[0].quality, QUALITY - 2);
+    }
+
+    @Test
+    public void qualityConjuredDegradeTwiceFastWhenDaysLess0() {
+        var app = new ItemLifecycleUpdater(new Item[]{new Item(CONJURED_MANA_CAKE, 0, QUALITY)});
+
+        app.processDailyChange();
+        assertEquals(app.items[0].quality, QUALITY - 4);
+    }
 }

@@ -29,6 +29,13 @@ dependencies {
     pitest "org.pitest:pitest-junit5-plugin:${pitestJunit5PluginVersion}"
 }
 
+build {
+    dependsOn 'test'
+    dependsOn 'jacocoTestReport'
+    dependsOn 'jacocoTestCoverageVerification'
+    dependsOn 'pitest'
+}
+
 test {
     useJUnitPlatform()
 }

@@ -64,6 +64,7 @@ pitest {
     threads = 4
     outputFormats = ['HTML']
     timestampedReports = false
+    mutationThreshold = 100
 }
 
 // TexttestFixture utility

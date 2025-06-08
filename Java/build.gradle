@@ -1,20 +1,9 @@
 plugins {
     id 'java'
+
     id 'jacoco'
-    id 'info.solidsoft.pitest' version '1.15.0'
-    id 'io.freefair.lombok' version "8.13.1"
-}
-
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    testImplementation platform('org.junit:junit-bom:5.10.2')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
-    testRuntimeOnly  'org.junit.jupiter:junit-jupiter-engine'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-    pitest 'org.pitest:pitest-junit5-plugin:1.2.1'
+    id 'info.solidsoft.pitest' version "${pitestPluginVersion}"
+    id 'io.freefair.lombok' version "${lombokPluginVersion}"
 }
 
 group = 'com.gildedrose'
@@ -25,16 +14,26 @@ java {
     targetCompatibility = JavaVersion.VERSION_17
 }
 
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // JUnit 5
+    testImplementation platform("org.junit:junit-bom:${junitBomVersion}")
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    // PIT Mutation Testing plugin for JUnit 5
+    pitest "org.pitest:pitest-junit5-plugin:${pitestJunit5PluginVersion}"
+}
+
 test {
     useJUnitPlatform()
 }
 
-task texttest(type: JavaExec) {
-    mainClass.set('com.gildedrose.TexttestFixture')
-    classpath = sourceSets.test.runtimeClasspath
-    args "30"
-}
-
+// Jacoco - Code Coverage Report
 jacocoTestReport {
     executionData(test)
     reports {
@@ -43,6 +42,7 @@ jacocoTestReport {
     }
 }
 
+// Jacoco - Coverage Threshold Enforcement
 jacocoTestCoverageVerification {
     executionData(test)
     violationRules {
@@ -55,14 +55,20 @@ jacocoTestCoverageVerification {
     }
 }
 
+// PIT - Mutation Testing
 pitest {
-    junit5PluginVersion = '1.2.1'
+    junit5PluginVersion = pitestJunit5PluginVersion
     targetClasses = ['com.gildedrose.lifecycle.*']
     targetTests = ['com.gildedrose.*']
     mutators = ['STRONGER']
     threads = 4
     outputFormats = ['HTML']
     timestampedReports = false
-
 }
 
+// TexttestFixture utility
+task texttest(type: JavaExec) {
+    mainClass.set('com.gildedrose.TexttestFixture')
+    classpath = sourceSets.test.runtimeClasspath
+    args "30"
+}

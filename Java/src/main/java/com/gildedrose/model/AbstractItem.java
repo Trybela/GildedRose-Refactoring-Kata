@@ -3,9 +3,11 @@ package com.gildedrose.model;
 import com.gildedrose.exeption.IllegalQualityException;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
 @Getter
 @RequiredArgsConstructor
+@ToString
 public abstract class AbstractItem {
 
     public static final int MAX_QUALITY = 50;
@@ -53,5 +55,4 @@ public abstract class AbstractItem {
         decreaseSellIn();
         changeQuality();
     }
-
 }

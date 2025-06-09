@@ -1,6 +1,6 @@
 package com.gildedrose;
 
-import com.gildedrose.exeption.IllegalQualityException;
+import com.gildedrose.exeption.ItemUpdateException;
 import com.gildedrose.lifecycle.ItemLifecycleUpdater;
 import com.gildedrose.model.Item;
 import com.gildedrose.model.SulfurasItem;
@@ -145,7 +145,7 @@ public class ItemLifecycleUnitTest {
         var items = List.of(new Item(DEFAULT_ITEM, 0, MAX_QUALITY + 1));
         var app = new ItemLifecycleUpdater();
 
-        assertThrows(IllegalQualityException.class, () -> app.processDailyChange(items));
+        assertThrows(ItemUpdateException.class, () -> app.processDailyChange(items));
     }
 
     @Test
@@ -153,6 +153,6 @@ public class ItemLifecycleUnitTest {
         var items = List.of(new Item(DEFAULT_ITEM, 0, MIN_QUALITY - 1));
         var app = new ItemLifecycleUpdater();
 
-        assertThrows(IllegalQualityException.class, () -> app.processDailyChange(items));
+        assertThrows(ItemUpdateException.class, () -> app.processDailyChange(items));
     }
 }

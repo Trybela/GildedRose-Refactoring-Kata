@@ -7,8 +7,7 @@ public class DefaultItem extends AbstractItem {
     }
 
     @Override
-    public void update() {
-        decreaseSellIn();
+    protected void changeQuality() {
         decreaseQuality();
         if (getSellIn() < 0) decreaseQuality();
     }

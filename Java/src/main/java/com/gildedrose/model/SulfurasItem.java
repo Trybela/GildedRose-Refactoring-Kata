@@ -9,6 +9,11 @@ public class SulfurasItem extends AbstractItem {
     }
 
     @Override
+    protected void changeQuality() {
+        // Legendary item - nothing happens
+    }
+
+    @Override
     public void update() {
         setQuality(CONSTANT_QUALITY);
     }

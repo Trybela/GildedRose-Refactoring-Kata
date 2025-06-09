@@ -7,8 +7,7 @@ public class AgedBrieItem extends AbstractItem {
     }
 
     @Override
-    public void update() {
-        decreaseSellIn();
+    protected void changeQuality() {
         increaseQuality();
         if (getSellIn() < 0) increaseQuality();
     }

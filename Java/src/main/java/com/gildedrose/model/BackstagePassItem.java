@@ -10,8 +10,7 @@ public class BackstagePassItem extends AbstractItem {
     }
 
     @Override
-    public void update() {
-        decreaseSellIn();
+    protected void changeQuality() {
         increaseQuality();
         if (getSellIn() < THRESHOLD_DOUBLE_INCREASE) increaseQuality();
         if (getSellIn() < THRESHOLD_TRIPLE_INCREASE) increaseQuality();

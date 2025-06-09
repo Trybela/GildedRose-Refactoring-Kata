@@ -1,5 +1,6 @@
 package com.gildedrose.model;
 
+import com.gildedrose.exeption.IllegalQualityException;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -40,6 +41,17 @@ public abstract class AbstractItem {
         item.quality = quality;
     }
 
-    public abstract void update();
+    protected void validate() {
+        if (item.quality < MIN_QUALITY || item.quality > MAX_QUALITY)
+            throw new IllegalQualityException(item);
+    }
+
+    protected abstract void changeQuality();
+
+    public void update() {
+        validate();
+        decreaseSellIn();
+        changeQuality();
+    }
 
 }

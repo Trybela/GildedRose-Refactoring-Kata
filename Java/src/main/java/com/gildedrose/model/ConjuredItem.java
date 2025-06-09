@@ -7,8 +7,7 @@ public class ConjuredItem extends AbstractItem {
     }
 
     @Override
-    public void update() {
-        decreaseSellIn();
+    protected void changeQuality() {
         decreaseQuality();
         decreaseQuality();
         if (getSellIn() < 0) {

@@ -2,6 +2,9 @@ package com.gildedrose.model;
 
 public class BackstagePassItem extends AbstractItem {
 
+    private static final int THRESHOLD_DOUBLE_INCREASE = 10;
+    private static final int THRESHOLD_TRIPLE_INCREASE = 5;
+
     public BackstagePassItem(Item item) {
         super(item);
     }
@@ -10,8 +13,8 @@ public class BackstagePassItem extends AbstractItem {
     public void update() {
         decreaseSellIn();
         increaseQuality();
-        if (getSellIn() < 10) increaseQuality();
-        if (getSellIn() < 5) increaseQuality();
+        if (getSellIn() < THRESHOLD_DOUBLE_INCREASE) increaseQuality();
+        if (getSellIn() < THRESHOLD_TRIPLE_INCREASE) increaseQuality();
 
         if (getSellIn() < 0) {
             resetQuality();

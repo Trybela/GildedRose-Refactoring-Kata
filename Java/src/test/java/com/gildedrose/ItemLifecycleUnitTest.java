@@ -2,6 +2,7 @@ package com.gildedrose;
 
 import com.gildedrose.lifecycle.ItemLifecycleUpdater;
 import com.gildedrose.model.Item;
+import com.gildedrose.model.SulfurasItem;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -63,12 +64,22 @@ public class ItemLifecycleUnitTest {
 
     @Test
     public void sulfurasNeverNeedsToBeSoldOrDecreasesInQuality() {
+        var items = List.of(new Item(SULFURAS_NAME, SELL_IN, SulfurasItem.CONSTANT_QUALITY));
+        var app = new ItemLifecycleUpdater();
+
+        app.processDailyChange(items);
+        assertEquals(items.get(0).sellIn, SELL_IN);
+        assertEquals(items.get(0).quality, SulfurasItem.CONSTANT_QUALITY);
+    }
+
+    @Test
+    public void sulfurasQualityAlwaysShouldEquals80() {
         var items = List.of(new Item(SULFURAS_NAME, SELL_IN, QUALITY));
         var app = new ItemLifecycleUpdater();
 
         app.processDailyChange(items);
         assertEquals(items.get(0).sellIn, SELL_IN);
-        assertEquals(items.get(0).quality, QUALITY);
+        assertEquals(items.get(0).quality, SulfurasItem.CONSTANT_QUALITY);
     }
 
     @Test

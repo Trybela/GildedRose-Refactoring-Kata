@@ -7,6 +7,9 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public abstract class AbstractItem {
 
+    private static final int MAX_QUALITY = 50;
+    private static final int MIN_QUALITY = 0;
+
     private final Item item;
 
     public int getSellIn() {
@@ -18,20 +21,25 @@ public abstract class AbstractItem {
     }
 
     protected void increaseQuality() {
-        if (item.quality < 50) {
+        if (item.quality < MAX_QUALITY) {
             item.quality++;
         }
     }
 
     protected void decreaseQuality() {
-        if (item.quality > 0) {
+        if (item.quality > MIN_QUALITY) {
             item.quality--;
         }
     }
 
     protected void resetQuality() {
-        item.quality = 0;
+        item.quality = MIN_QUALITY;
+    }
+
+    protected void setQuality(int quality) {
+        item.quality = quality;
     }
 
     public abstract void update();
+
 }

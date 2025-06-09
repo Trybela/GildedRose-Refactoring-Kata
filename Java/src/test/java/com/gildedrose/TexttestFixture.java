@@ -5,28 +5,58 @@ import com.gildedrose.model.Item;
 
 import java.util.List;
 
-public class TexttestFixture {
+public final class TexttestFixture {
+
+    private static final int DEFAULT_SIMULATION_DAYS = 2;
+
+    private TexttestFixture() {}
+
     public static void main(String[] args) {
         System.out.println("OMGHAI!");
 
-        List<Item> items = SetUpHelperTest.setUpItems();
+        List<Item> initialInventory = SetUpHelperTest.setUpItems();
+        Item[] inventoryArray = initialInventory.toArray(new Item[0]);
+        var updater = new ItemLifecycleUpdater();
 
-        ItemLifecycleUpdater app = new ItemLifecycleUpdater();
+        int days = parseDaysArgument(args);
 
-        int days = 2;
-        if (args.length > 0) {
-            days = Integer.parseInt(args[0]) + 1;
+        simulate(days, inventoryArray, updater);
+    }
+
+    private static int parseDaysArgument(String[] args) {
+        if (args.length == 0) {
+            return DEFAULT_SIMULATION_DAYS;
         }
-
-        for (int i = 0; i < days; i++) {
-            System.out.println("-------- day " + i + " --------");
-            System.out.println("name, sellIn, quality");
-            for (Item item : items) {
-                System.out.println(item);
-            }
-            System.out.println();
-            app.processDailyChange(items);
+        try {
+            int parsed = Integer.parseInt(args[0]);
+            return parsed < 0 ? DEFAULT_SIMULATION_DAYS : parsed + 1;
+        } catch (NumberFormatException ex) {
+            System.err.printf(
+                    "Cannot parse '%s' as an integer. Falling back to default of %d days.%n",
+                    args[0], DEFAULT_SIMULATION_DAYS);
+            return DEFAULT_SIMULATION_DAYS;
         }
     }
 
+    private static void simulate(int days, Item[] inventory, ItemLifecycleUpdater updater) {
+        for (int day = 0; day < days; day++) {
+            printInventoryHeader(day);
+            for (Item item : inventory) {
+                System.out.println(item);
+            }
+            System.out.println();
+
+            try {
+                updater.processDailyChange(List.of(inventory));
+            } catch (Exception e) {
+                System.err.printf("Inventory update failed on day %d: %s%n", day, e.getMessage());
+                break;
+            }
+        }
+    }
+
+    private static void printInventoryHeader(int day) {
+        System.out.printf("-------- day %d --------%n", day);
+        System.out.println("name, sellIn, quality");
+    }
 }

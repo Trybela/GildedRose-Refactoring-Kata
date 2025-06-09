@@ -63,7 +63,7 @@ class ItemLifecycleGoldenMasterTest {
     private static Stream<Arguments> expectedItemValuesToDayProvider() {
         return Stream.of(
             Arguments.of(30, List.of(
-                new TestItem(DEXTERITY_VEST,
+                new TestItem(DEXTERITY_VEST_NAME,
                     new int[]{
                         9, 8, 7, 6, 5, 4, 3, 2, 1, 0,
                         -1, -2, -3, -4, -5, -6, -7, -8, -9, -10,
@@ -74,7 +74,7 @@ class ItemLifecycleGoldenMasterTest {
                         0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
                 ),
 
-                new TestItem(AGED_BRIE,
+                new TestItem(AGED_BRIE_NAME,
                     new int[]{
                         1, 0, -1, -2, -3, -4, -5, -6, -7, -8,
                         -9, -10, -11, -12, -13, -14, -15, -16, -17, -18,
@@ -85,7 +85,7 @@ class ItemLifecycleGoldenMasterTest {
                         40, 42, 44, 46, 48, 50, 50, 50, 50, 50}
                 ),
 
-                new TestItem(ELIXIR_OF_THE_MONGOOSE,
+                new TestItem(ELIXIR_OF_THE_MONGOOSE_NAME,
                     new int[]{
                         4, 3, 2, 1, 0, -1, -2, -3, -4, -5,
                         -6, -7, -8, -9, -10, -11, -12, -13, -14, -15,
@@ -96,7 +96,7 @@ class ItemLifecycleGoldenMasterTest {
                         0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
                 ),
 
-                new TestItem(SULFURAS,
+                new TestItem(SULFURAS_NAME,
                     new int[]{
                         0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                         0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -107,7 +107,7 @@ class ItemLifecycleGoldenMasterTest {
                         80, 80, 80, 80, 80, 80, 80, 80, 80, 80}
                 ),
 
-                new TestItem(SULFURAS,
+                new TestItem(SULFURAS_NAME,
                     new int[]{
                         -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
                         -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
@@ -118,7 +118,7 @@ class ItemLifecycleGoldenMasterTest {
                         80, 80, 80, 80, 80, 80, 80, 80, 80, 80}
                 ),
 
-                new TestItem(BACKSTAGE_PASSES,
+                new TestItem(BACKSTAGE_PASSES_NAME,
                     new int[]{
                         14, 13, 12, 11, 10, 9, 8, 7, 6, 5,
                         4, 3, 2, 1, 0, -1, -2, -3, -4, -5,
@@ -129,7 +129,7 @@ class ItemLifecycleGoldenMasterTest {
                         0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
                 ),
 
-                new TestItem(BACKSTAGE_PASSES,
+                new TestItem(BACKSTAGE_PASSES_NAME,
                     new int[]{
                         9, 8, 7, 6, 5, 4, 3, 2, 1, 0,
                         -1, -2, -3, -4, -5, -6, -7, -8, -9, -10,
@@ -140,7 +140,7 @@ class ItemLifecycleGoldenMasterTest {
                         0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
                 ),
 
-                new TestItem(BACKSTAGE_PASSES,
+                new TestItem(BACKSTAGE_PASSES_NAME,
                     new int[]{
                         4, 3, 2, 1, 0, -1, -2, -3, -4, -5,
                         -6, -7, -8, -9, -10, -11, -12, -13, -14, -15,
@@ -151,7 +151,7 @@ class ItemLifecycleGoldenMasterTest {
                         0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
                 ),
 
-                new TestItem(CONJURED_MANA_CAKE,
+                new TestItem(CONJURED_MANA_CAKE_NAME,
                     new int[]{
                         2, 1, 0, -1, -2, -3, -4, -5, -6, -7,
                         -8, -9, -10, -11, -12, -13, -14, -15, -16, -17,
@@ -163,7 +163,7 @@ class ItemLifecycleGoldenMasterTest {
                         0, 0, 0, 0, 0, 0, 0, 0, 0, 0
                     }
                 ),
-                new TestItem(CONJURED_MANA_CAKE,
+                new TestItem(CONJURED_MANA_CAKE_NAME,
                     new int[]{
                         1, 0, -1, -2, -3, -4, -5, -6, -7, -8,
                         -9, -10, -11, -12, -13, -14, -15, -16, -17, -18,

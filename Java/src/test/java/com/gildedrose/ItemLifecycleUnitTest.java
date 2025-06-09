@@ -45,7 +45,7 @@ public class ItemLifecycleUnitTest {
 
     @Test
     public void qualityAgedBrieIncreasesOlderItGets() {
-        var items = List.of(new Item(AGED_BRIE, SELL_IN, QUALITY));
+        var items = List.of(new Item(AGED_BRIE_NAME, SELL_IN, QUALITY));
         var app = new ItemLifecycleUpdater();
 
         app.processDailyChange(items);
@@ -54,7 +54,7 @@ public class ItemLifecycleUnitTest {
 
     @Test
     public void qualityItemIsNeverMoreThan50() {
-        var items = List.of(new Item(AGED_BRIE, SELL_IN, 50));
+        var items = List.of(new Item(AGED_BRIE_NAME, SELL_IN, 50));
         var app = new ItemLifecycleUpdater();
 
         app.processDailyChange(items);
@@ -63,7 +63,7 @@ public class ItemLifecycleUnitTest {
 
     @Test
     public void sulfurasNeverNeedsToBeSoldOrDecreasesInQuality() {
-        var items = List.of(new Item(SULFURAS, SELL_IN, QUALITY));
+        var items = List.of(new Item(SULFURAS_NAME, SELL_IN, QUALITY));
         var app = new ItemLifecycleUpdater();
 
         app.processDailyChange(items);
@@ -73,7 +73,7 @@ public class ItemLifecycleUnitTest {
 
     @Test
     public void qualityBackstagePassesIncreasesBy1WhenMoreThen10Days() {
-        var items = List.of(new Item(BACKSTAGE_PASSES, 11, QUALITY));
+        var items = List.of(new Item(BACKSTAGE_PASSES_NAME, 11, QUALITY));
         var app = new ItemLifecycleUpdater();
 
         app.processDailyChange(items);
@@ -82,7 +82,7 @@ public class ItemLifecycleUnitTest {
 
     @Test
     public void qualityBackstagePassesIncreasesBy2When10DaysOrLess() {
-        var items = List.of(new Item(BACKSTAGE_PASSES, 10, QUALITY));
+        var items = List.of(new Item(BACKSTAGE_PASSES_NAME, 10, QUALITY));
         var app = new ItemLifecycleUpdater();
 
         app.processDailyChange(items);
@@ -91,7 +91,7 @@ public class ItemLifecycleUnitTest {
 
     @Test
     public void qualityBackstagePassesIncreasesBy3When5DaysOrLess() {
-        var items = List.of(new Item(BACKSTAGE_PASSES, 5, QUALITY));
+        var items = List.of(new Item(BACKSTAGE_PASSES_NAME, 5, QUALITY));
         var app = new ItemLifecycleUpdater();
 
         app.processDailyChange(items);
@@ -100,7 +100,7 @@ public class ItemLifecycleUnitTest {
 
     @Test
     public void qualityBackstagePassesDropsTo0With0Days() {
-        var items = List.of(new Item(BACKSTAGE_PASSES, 0, QUALITY));
+        var items = List.of(new Item(BACKSTAGE_PASSES_NAME, 0, QUALITY));
         var app = new ItemLifecycleUpdater();
 
         app.processDailyChange(items);
@@ -109,7 +109,7 @@ public class ItemLifecycleUnitTest {
 
     @Test
     public void qualityConjuredDegradeTwiceFast() {
-        var items = List.of(new Item(CONJURED_MANA_CAKE, SELL_IN, QUALITY));
+        var items = List.of(new Item(CONJURED_MANA_CAKE_NAME, SELL_IN, QUALITY));
         var app = new ItemLifecycleUpdater();
 
         app.processDailyChange(items);
@@ -118,7 +118,7 @@ public class ItemLifecycleUnitTest {
 
     @Test
     public void qualityConjuredDegradeTwiceFastWhenDaysLess0() {
-        var items = List.of(new Item(CONJURED_MANA_CAKE, 0, QUALITY));
+        var items = List.of(new Item(CONJURED_MANA_CAKE_NAME, 0, QUALITY));
         var app = new ItemLifecycleUpdater();
 
         app.processDailyChange(items);

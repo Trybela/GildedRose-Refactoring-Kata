@@ -10,16 +10,16 @@ public class SetUpHelperTest {
 
     static List<Item> setUpItems() {
         return List.of(
-            new Item(DEXTERITY_VEST, 10, 20),
-            new Item(AGED_BRIE, 2, 0),
-            new Item(ELIXIR_OF_THE_MONGOOSE, 5, 7),
-            new Item(SULFURAS, 0, 80),
-            new Item(SULFURAS, -1, 80),
-            new Item(BACKSTAGE_PASSES, 15, 20),
-            new Item(BACKSTAGE_PASSES, 10, 49),
-            new Item(BACKSTAGE_PASSES, 5, 49),
-            new Item(CONJURED_MANA_CAKE, 3, 6),
-            new Item(CONJURED_MANA_CAKE, 2, 58)
+            new Item(DEXTERITY_VEST_NAME, 10, 20),
+            new Item(AGED_BRIE_NAME, 2, 0),
+            new Item(ELIXIR_OF_THE_MONGOOSE_NAME, 5, 7),
+            new Item(SULFURAS_NAME, 0, 80),
+            new Item(SULFURAS_NAME, -1, 80),
+            new Item(BACKSTAGE_PASSES_NAME, 15, 20),
+            new Item(BACKSTAGE_PASSES_NAME, 10, 49),
+            new Item(BACKSTAGE_PASSES_NAME, 5, 49),
+            new Item(CONJURED_MANA_CAKE_NAME, 3, 6),
+            new Item(CONJURED_MANA_CAKE_NAME, 2, 58)
         );
     }
 }

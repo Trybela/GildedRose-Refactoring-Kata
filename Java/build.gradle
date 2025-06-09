@@ -54,7 +54,7 @@ jacocoTestCoverageVerification {
     executionData(test)
     violationRules {
         rule {
-            includes = ['com/gildedrose/lifecycle/**', 'com/gildedrose/model/**']
+            includes = ['com/gildedrose/lifecycle/**', 'com/gildedrose/model/**', 'com/gildedrose/enums/**']
             excludes = ['com/gildedrose/model/Item*']
             limit {
                 minimum = 1
@@ -66,7 +66,7 @@ jacocoTestCoverageVerification {
 // PIT - Mutation Testing
 pitest {
     junit5PluginVersion = pitestJunit5PluginVersion
-    targetClasses = ['com.gildedrose.lifecycle.*', 'com.gildedrose.model.*']
+    targetClasses = ['com.gildedrose.lifecycle.*', 'com.gildedrose.model.*', 'com.gildedrose.enums.*']
     targetTests = ['com.gildedrose.*']
     excludedClasses = ['com.gildedrose.model.Item']
     mutators = ['STRONGER']

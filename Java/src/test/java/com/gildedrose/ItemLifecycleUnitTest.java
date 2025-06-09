@@ -1,5 +1,6 @@
 package com.gildedrose;
 
+import com.gildedrose.exeption.IllegalQualityException;
 import com.gildedrose.lifecycle.ItemLifecycleUpdater;
 import com.gildedrose.model.Item;
 import com.gildedrose.model.SulfurasItem;
@@ -8,7 +9,10 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static com.gildedrose.constant.ItemsNameConstant.*;
+import static com.gildedrose.model.AbstractItem.MAX_QUALITY;
+import static com.gildedrose.model.AbstractItem.MIN_QUALITY;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ItemLifecycleUnitTest {
 
@@ -134,5 +138,21 @@ public class ItemLifecycleUnitTest {
 
         app.processDailyChange(items);
         assertEquals(items.get(0).quality, QUALITY - 4);
+    }
+
+    @Test
+    public void shouldThrowExceptionWhenQualityBiggerThenMax() {
+        var items = List.of(new Item(DEFAULT_ITEM, 0, MAX_QUALITY + 1));
+        var app = new ItemLifecycleUpdater();
+
+        assertThrows(IllegalQualityException.class, () -> app.processDailyChange(items));
+    }
+
+    @Test
+    public void shouldThrowExceptionWhenQualityLessAsMin() {
+        var items = List.of(new Item(DEFAULT_ITEM, 0, MIN_QUALITY - 1));
+        var app = new ItemLifecycleUpdater();
+
+        assertThrows(IllegalQualityException.class, () -> app.processDailyChange(items));
     }
 }

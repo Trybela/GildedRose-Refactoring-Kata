@@ -7,8 +7,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public abstract class AbstractItem {
 
-    private static final int MAX_QUALITY = 50;
-    private static final int MIN_QUALITY = 0;
+    public static final int MAX_QUALITY = 50;
+    public static final int MIN_QUALITY = 0;
 
     private final Item item;
 

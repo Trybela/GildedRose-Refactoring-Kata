@@ -19,7 +19,7 @@ public class SetUpHelperTest {
             new Item(BACKSTAGE_PASSES_NAME, 10, 49),
             new Item(BACKSTAGE_PASSES_NAME, 5, 49),
             new Item(CONJURED_MANA_CAKE_NAME, 3, 6),
-            new Item(CONJURED_MANA_CAKE_NAME, 2, 58)
+            new Item(CONJURED_MANA_CAKE_NAME, 2, 50)
         );
     }
 }

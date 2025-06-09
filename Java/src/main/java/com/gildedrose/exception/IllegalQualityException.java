@@ -1,4 +1,4 @@
-package com.gildedrose.exeption;
+package com.gildedrose.exception;
 
 import com.gildedrose.model.Item;
 

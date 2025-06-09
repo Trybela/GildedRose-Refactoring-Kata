@@ -1,6 +1,6 @@
 package com.gildedrose;
 
-import com.gildedrose.exeption.ItemUpdateException;
+import com.gildedrose.exception.ItemUpdateException;
 import com.gildedrose.lifecycle.ItemLifecycleUpdater;
 import com.gildedrose.model.Item;
 import com.gildedrose.model.SulfurasItem;

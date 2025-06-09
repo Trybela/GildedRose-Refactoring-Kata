@@ -1,7 +1,7 @@
 package com.gildedrose.lifecycle;
 
 import com.gildedrose.enums.ItemType;
-import com.gildedrose.exeption.ItemUpdateException;
+import com.gildedrose.exception.ItemUpdateException;
 import com.gildedrose.model.AbstractItem;
 import com.gildedrose.model.Item;
 import lombok.Getter;

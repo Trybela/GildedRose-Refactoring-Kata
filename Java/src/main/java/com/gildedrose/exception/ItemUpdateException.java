@@ -1,4 +1,4 @@
-package com.gildedrose.exeption;
+package com.gildedrose.exception;
 
 public class ItemUpdateException extends RuntimeException {
 

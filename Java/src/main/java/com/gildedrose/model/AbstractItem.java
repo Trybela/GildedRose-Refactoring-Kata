@@ -1,6 +1,6 @@
 package com.gildedrose.model;
 
-import com.gildedrose.exeption.IllegalQualityException;
+import com.gildedrose.exception.IllegalQualityException;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;

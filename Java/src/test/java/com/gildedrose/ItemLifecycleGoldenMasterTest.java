@@ -1,6 +1,7 @@
 package com.gildedrose;
 
 import com.gildedrose.lifecycle.ItemLifecycleUpdater;
+import com.gildedrose.model.AbstractItem;
 import com.gildedrose.model.Item;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.function.Executable;
@@ -36,22 +37,22 @@ class ItemLifecycleGoldenMasterTest {
         // Update quality & Assert – day‑by‑day
         for (int day = 0; day < days; day++) {
 
-            app.processDailyChange(this.items);
+            List<AbstractItem> resultItems = app.processDailyChange(this.items);
 
             final int idx = day;
             assertAll("Day " + (idx + 1),
                 IntStream.range(0, expectations.size())
                     .mapToObj(i -> (Executable) () ->
-                        assertItem(idx, this.items.get(i), expectations.get(i)))
+                        assertItem(idx, resultItems.get(i), expectations.get(i)))
                     .toArray(Executable[]::new)
             );
         }
     }
 
-    private static void assertItem(int day, Item actualItem, TestItem expectedItem) {
-        assertEquals(expectedItem.name(), actualItem.name);
-        assertEquals(expectedItem.sellInArray()[day], actualItem.sellIn);
-        assertEquals(expectedItem.qualityArray()[day], actualItem.quality);
+    private static void assertItem(int day, AbstractItem actualItem, TestItem expectedItem) {
+        assertEquals(expectedItem.name(), actualItem.getName());
+        assertEquals(expectedItem.sellInArray()[day], actualItem.getSellIn());
+        assertEquals(expectedItem.qualityArray()[day], actualItem.getQuality());
     }
 
     /**

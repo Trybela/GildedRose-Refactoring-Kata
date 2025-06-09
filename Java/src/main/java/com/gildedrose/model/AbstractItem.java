@@ -19,6 +19,14 @@ public abstract class AbstractItem {
         return item.sellIn;
     }
 
+    public int getQuality() {
+        return item.quality;
+    }
+
+    public String getName() {
+        return item.name;
+    }
+
     protected void decreaseSellIn() {
         item.sellIn--;
     }
@@ -50,9 +58,10 @@ public abstract class AbstractItem {
 
     protected abstract void changeQuality();
 
-    public void update() {
+    public AbstractItem update() {
         validate();
         decreaseSellIn();
         changeQuality();
+        return this;
     }
 }

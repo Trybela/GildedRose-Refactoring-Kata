@@ -14,7 +14,8 @@ public class SulfurasItem extends AbstractItem {
     }
 
     @Override
-    public void update() {
+    public AbstractItem update() {
         setQuality(CONSTANT_QUALITY);
+        return this;
     }
 }

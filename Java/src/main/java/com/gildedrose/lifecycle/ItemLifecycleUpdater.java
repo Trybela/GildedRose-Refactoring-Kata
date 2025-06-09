@@ -13,22 +13,25 @@ import java.util.List;
 @Getter
 public class ItemLifecycleUpdater {
 
-    public void processDailyChange(List<Item> items) {
+    public List<AbstractItem> processDailyChange(List<Item> items) {
         log.debug("Starting processing of daily change for the following items: {}", items);
 
-        items.stream()
+        List<AbstractItem> updatedItems = items.stream()
             .map(ItemType::applyFromItem)
-            .forEach(this::processItemDailyChange);
+            .map(this::processItemDailyChange)
+            .toList();
 
         log.debug("Finished processing of daily change.");
+        return updatedItems;
     }
 
-    private void processItemDailyChange(AbstractItem abstractItem) {
+    private AbstractItem processItemDailyChange(AbstractItem abstractItem) {
         log.debug("Starting processing of daily change for the item: {}", abstractItem);
 
         try {
-            abstractItem.update();
+            AbstractItem updatedItem = abstractItem.update();
             log.debug("Finished processing of daily change. Result item: {}", abstractItem);
+            return updatedItem;
         } catch (Exception ex) {
             log.error("Failed to update item {} - skipping. Root cause: {}", abstractItem, ex, ex);
             throw new ItemUpdateException("Failed to update item"  + abstractItem, ex);

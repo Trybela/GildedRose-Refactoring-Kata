@@ -4,6 +4,8 @@ import com.gildedrose.lifecycle.ItemLifecycleUpdater;
 import com.gildedrose.model.Item;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static com.gildedrose.constant.ItemsNameConstant.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -15,99 +17,111 @@ public class ItemLifecycleUnitTest {
 
     @Test
     public void qualityDegradesNormally() {
-        var app = new ItemLifecycleUpdater(new Item[]{new Item(DEFAULT_ITEM, SELL_IN, QUALITY)});
+        var items = List.of(new Item(DEFAULT_ITEM, SELL_IN, QUALITY));
+        var app = new ItemLifecycleUpdater();
 
-        app.processDailyChange();
+        app.processDailyChange(items);
 
-        assertEquals(app.getItem(0).quality, QUALITY - 1);
+        assertEquals(items.get(0).quality, QUALITY - 1);
     }
 
     @Test
     public void qualityDegradesTwiceFastOnceSellDateHasPassed() {
-        var app = new ItemLifecycleUpdater(new Item[]{new Item(DEFAULT_ITEM, 0, QUALITY)});
+        var items = List.of(new Item(DEFAULT_ITEM, 0, QUALITY));
+        var app = new ItemLifecycleUpdater();
 
-        app.processDailyChange();
-        assertEquals(app.getItem(0).quality, QUALITY - 2);
+        app.processDailyChange(items);
+        assertEquals(items.get(0).quality, QUALITY - 2);
     }
 
     @Test
     public void qualityIsNeverNegative() {
-        var app = new ItemLifecycleUpdater(new Item[]{new Item(DEFAULT_ITEM, SELL_IN, 0)});
+        var items = List.of(new Item(DEFAULT_ITEM, SELL_IN, 0));
+        var app = new ItemLifecycleUpdater();
 
-        app.processDailyChange();
-        assertEquals(app.getItem(0).quality, 0);
+        app.processDailyChange(items);
+        assertEquals(items.get(0).quality, 0);
     }
 
     @Test
     public void qualityAgedBrieIncreasesOlderItGets() {
-        var app = new ItemLifecycleUpdater(new Item[]{new Item(AGED_BRIE, SELL_IN, QUALITY)});
+        var items = List.of(new Item(AGED_BRIE, SELL_IN, QUALITY));
+        var app = new ItemLifecycleUpdater();
 
-        app.processDailyChange();
-        assertEquals(app.getItem(0).quality, QUALITY + 1);
+        app.processDailyChange(items);
+        assertEquals(items.get(0).quality, QUALITY + 1);
     }
 
     @Test
     public void qualityItemIsNeverMoreThan50() {
-        var app = new ItemLifecycleUpdater(new Item[]{new Item(AGED_BRIE, SELL_IN, 50)});
+        var items = List.of(new Item(AGED_BRIE, SELL_IN, 50));
+        var app = new ItemLifecycleUpdater();
 
-        app.processDailyChange();
-        assertEquals(app.getItem(0).quality, 50);
+        app.processDailyChange(items);
+        assertEquals(items.get(0).quality, 50);
     }
 
     @Test
     public void sulfurasNeverNeedsToBeSoldOrDecreasesInQuality() {
-        var app = new ItemLifecycleUpdater(new Item[]{new Item(SULFURAS, SELL_IN, QUALITY)});
+        var items = List.of(new Item(SULFURAS, SELL_IN, QUALITY));
+        var app = new ItemLifecycleUpdater();
 
-        app.processDailyChange();
-        assertEquals(app.getItem(0).sellIn, SELL_IN);
-        assertEquals(app.getItem(0).quality, QUALITY);
+        app.processDailyChange(items);
+        assertEquals(items.get(0).sellIn, SELL_IN);
+        assertEquals(items.get(0).quality, QUALITY);
     }
 
     @Test
     public void qualityBackstagePassesIncreasesBy1WhenMoreThen10Days() {
-        var app = new ItemLifecycleUpdater(new Item[]{new Item(BACKSTAGE_PASSES, 11, QUALITY)});
+        var items = List.of(new Item(BACKSTAGE_PASSES, 11, QUALITY));
+        var app = new ItemLifecycleUpdater();
 
-        app.processDailyChange();
-        assertEquals(app.getItem(0).quality, QUALITY + 1);
+        app.processDailyChange(items);
+        assertEquals(items.get(0).quality, QUALITY + 1);
     }
 
     @Test
     public void qualityBackstagePassesIncreasesBy2When10DaysOrLess() {
-        var app = new ItemLifecycleUpdater(new Item[]{new Item(BACKSTAGE_PASSES, 10, QUALITY)});
+        var items = List.of(new Item(BACKSTAGE_PASSES, 10, QUALITY));
+        var app = new ItemLifecycleUpdater();
 
-        app.processDailyChange();
-        assertEquals(app.getItem(0).quality, QUALITY + 2);
+        app.processDailyChange(items);
+        assertEquals(items.get(0).quality, QUALITY + 2);
     }
 
     @Test
     public void qualityBackstagePassesIncreasesBy3When5DaysOrLess() {
-        var app = new ItemLifecycleUpdater(new Item[]{new Item(BACKSTAGE_PASSES, 5, QUALITY)});
+        var items = List.of(new Item(BACKSTAGE_PASSES, 5, QUALITY));
+        var app = new ItemLifecycleUpdater();
 
-        app.processDailyChange();
-        assertEquals(app.getItem(0).quality, QUALITY + 3);
+        app.processDailyChange(items);
+        assertEquals(items.get(0).quality, QUALITY + 3);
     }
 
     @Test
     public void qualityBackstagePassesDropsTo0With0Days() {
-        var app = new ItemLifecycleUpdater(new Item[]{new Item(BACKSTAGE_PASSES, 0, QUALITY)});
+        var items = List.of(new Item(BACKSTAGE_PASSES, 0, QUALITY));
+        var app = new ItemLifecycleUpdater();
 
-        app.processDailyChange();
-        assertEquals(app.getItem(0).quality, 0);
+        app.processDailyChange(items);
+        assertEquals(items.get(0).quality, 0);
     }
 
     @Test
     public void qualityConjuredDegradeTwiceFast() {
-        var app = new ItemLifecycleUpdater(new Item[]{new Item(CONJURED_MANA_CAKE, SELL_IN, QUALITY)});
+        var items = List.of(new Item(CONJURED_MANA_CAKE, SELL_IN, QUALITY));
+        var app = new ItemLifecycleUpdater();
 
-        app.processDailyChange();
-        assertEquals(app.getItem(0).quality, QUALITY - 2);
+        app.processDailyChange(items);
+        assertEquals(items.get(0).quality, QUALITY - 2);
     }
 
     @Test
     public void qualityConjuredDegradeTwiceFastWhenDaysLess0() {
-        var app = new ItemLifecycleUpdater(new Item[]{new Item(CONJURED_MANA_CAKE, 0, QUALITY)});
+        var items = List.of(new Item(CONJURED_MANA_CAKE, 0, QUALITY));
+        var app = new ItemLifecycleUpdater();
 
-        app.processDailyChange();
-        assertEquals(app.getItem(0).quality, QUALITY - 4);
+        app.processDailyChange(items);
+        assertEquals(items.get(0).quality, QUALITY - 4);
     }
 }

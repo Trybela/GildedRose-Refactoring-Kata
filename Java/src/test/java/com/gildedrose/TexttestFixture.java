@@ -3,13 +3,15 @@ package com.gildedrose;
 import com.gildedrose.lifecycle.ItemLifecycleUpdater;
 import com.gildedrose.model.Item;
 
+import java.util.List;
+
 public class TexttestFixture {
     public static void main(String[] args) {
         System.out.println("OMGHAI!");
 
-        Item[] items = SetUpHelperTest.setUpItems();
+        List<Item> items = SetUpHelperTest.setUpItems();
 
-        ItemLifecycleUpdater app = new ItemLifecycleUpdater(items);
+        ItemLifecycleUpdater app = new ItemLifecycleUpdater();
 
         int days = 2;
         if (args.length > 0) {
@@ -23,7 +25,7 @@ public class TexttestFixture {
                 System.out.println(item);
             }
             System.out.println();
-            app.processDailyChange();
+            app.processDailyChange(items);
         }
     }
 

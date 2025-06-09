@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ItemLifecycleGoldenMasterTest {
 
-    private Item[] items;
+    private List<Item> items;
 
     @BeforeEach
     void setUpItems() {
@@ -31,18 +31,18 @@ class ItemLifecycleGoldenMasterTest {
     @ParameterizedTest(name = "Validate inventory after {0} days")
     @MethodSource("expectedItemValuesToDayProvider")
     void inventoryMatchesExpectationsAfterDays(int days, List<TestItem> expectations) {
-        ItemLifecycleUpdater app = new ItemLifecycleUpdater(items);
+        var app = new ItemLifecycleUpdater();
 
         // Update quality & Assert – day‑by‑day
         for (int day = 0; day < days; day++) {
 
-            app.processDailyChange();
+            app.processDailyChange(this.items);
 
             final int idx = day;
             assertAll("Day " + (idx + 1),
                 IntStream.range(0, expectations.size())
                     .mapToObj(i -> (Executable) () ->
-                        assertItem(idx, app.getItem(i), expectations.get(i)))
+                        assertItem(idx, this.items.get(i), expectations.get(i)))
                     .toArray(Executable[]::new)
             );
         }

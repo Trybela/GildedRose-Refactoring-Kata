@@ -9,10 +9,6 @@ public abstract class AbstractItem {
 
     private final Item item;
 
-    public String getName() {
-        return item.name;
-    }
-
     public int getSellIn() {
         return item.sellIn;
     }

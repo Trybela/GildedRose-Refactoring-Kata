@@ -78,3 +78,25 @@ The other relies on your CLASSPATH being set correctly in [environment.gr](../te
 
     executable:com.gildedrose.TexttestFixture
     interpreter:java
+
+
+## Step-by-Step Solution Approach
+
+
+1. **Jacoco gate first** – wired Jacoco into Gradle with a *100 % line-coverage* rule on the production packages (DTO `Item` excluded).
+   *Result → build red → forced to write tests.*
+
+2. **Golden-master test** – ported the original `TexttestFixture` to JUnit 5, capturing day-by-day output so later refactors must stay behaviour-compatible.
+
+3. **Mutation testing (PIT)** – enabled `STRONGER` mutators with a *100 % kill rate*.
+   *Result → build red again → added parameterised tests until every mutant died.*
+
+4. **Started step by step refactoring** – refactor main logic on small logical steps. Isolation logic for each of product types.
+5. **Introduce new Conjured product** - write test for Conjured product behaviour and bussines logic for it.
+6. **Wrap raw Item into AbstractItem like wrapper** - introduce AbstractItem class with encapsulation compliance and inheriting classes that corresponds item types.
+7. ***ItemType enum like factory for types** - create enum that to resolve right implementation for each input product name.
+7. **Input validation** – enforced `quality ∈ [0, 50]` and other invariants at object-creation time; wrote dedicated tests to prove guards.
+
+8. **Logging added** – introduced SLF4J + log4j;
+9. **Error handling**  - custom exceptions and handling.
+

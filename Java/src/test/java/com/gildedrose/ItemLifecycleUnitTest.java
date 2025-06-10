@@ -2,7 +2,6 @@ package com.gildedrose;
 
 import com.gildedrose.exception.ItemUpdateException;
 import com.gildedrose.lifecycle.ItemLifecycleUpdater;
-import com.gildedrose.model.AbstractItem;
 import com.gildedrose.model.Item;
 import com.gildedrose.model.SulfurasItem;
 import org.junit.jupiter.api.Test;
@@ -26,9 +25,9 @@ public class ItemLifecycleUnitTest {
         var items = List.of(new Item(DEFAULT_ITEM, SELL_IN, QUALITY));
         var app = new ItemLifecycleUpdater();
 
-        List<AbstractItem> result = app.processDailyChange(items);
+        app.processDailyChange(items);
 
-        assertEquals(QUALITY - 1, result.get(0).getQuality());
+        assertEquals(QUALITY - 1, items.get(0).quality);
     }
 
     @Test
@@ -36,8 +35,8 @@ public class ItemLifecycleUnitTest {
         var items = List.of(new Item(DEFAULT_ITEM, 0, QUALITY));
         var app = new ItemLifecycleUpdater();
 
-        List<AbstractItem> result = app.processDailyChange(items);
-        assertEquals(QUALITY - 2, result.get(0).getQuality());
+        app.processDailyChange(items);
+        assertEquals(QUALITY - 2, items.get(0).quality);
     }
 
     @Test
@@ -45,8 +44,8 @@ public class ItemLifecycleUnitTest {
         var items = List.of(new Item(DEFAULT_ITEM, SELL_IN, 0));
         var app = new ItemLifecycleUpdater();
 
-        List<AbstractItem> result =app.processDailyChange(items);
-        assertEquals(0, result.get(0).getQuality());
+        app.processDailyChange(items);
+        assertEquals(0, items.get(0).quality);
     }
 
     @Test
@@ -54,8 +53,8 @@ public class ItemLifecycleUnitTest {
         var items = List.of(new Item(AGED_BRIE_NAME, SELL_IN, QUALITY));
         var app = new ItemLifecycleUpdater();
 
-        List<AbstractItem> result =app.processDailyChange(items);
-        assertEquals(QUALITY + 1, result.get(0).getQuality());
+        app.processDailyChange(items);
+        assertEquals(QUALITY + 1, items.get(0).quality);
     }
 
     @Test
@@ -63,8 +62,8 @@ public class ItemLifecycleUnitTest {
         var items = List.of(new Item(AGED_BRIE_NAME, SELL_IN, 50));
         var app = new ItemLifecycleUpdater();
 
-        List<AbstractItem> result =app.processDailyChange(items);
-        assertEquals(50, result.get(0).getQuality());
+        app.processDailyChange(items);
+        assertEquals(50, items.get(0).quality);
     }
 
     @Test
@@ -72,9 +71,9 @@ public class ItemLifecycleUnitTest {
         var items = List.of(new Item(SULFURAS_NAME, SELL_IN, SulfurasItem.CONSTANT_QUALITY));
         var app = new ItemLifecycleUpdater();
 
-        List<AbstractItem> result =app.processDailyChange(items);
-        assertEquals(SELL_IN, result.get(0).getSellIn());
-        assertEquals(SulfurasItem.CONSTANT_QUALITY, result.get(0).getQuality());
+        app.processDailyChange(items);
+        assertEquals(SELL_IN, items.get(0).sellIn);
+        assertEquals(SulfurasItem.CONSTANT_QUALITY, items.get(0).quality);
     }
 
     @Test
@@ -82,9 +81,9 @@ public class ItemLifecycleUnitTest {
         var items = List.of(new Item(SULFURAS_NAME, SELL_IN, QUALITY));
         var app = new ItemLifecycleUpdater();
 
-        List<AbstractItem> result =app.processDailyChange(items);
-        assertEquals(SELL_IN, result.get(0).getSellIn());
-        assertEquals(SulfurasItem.CONSTANT_QUALITY, result.get(0).getQuality());
+        app.processDailyChange(items);
+        assertEquals(SELL_IN, items.get(0).sellIn);
+        assertEquals(SulfurasItem.CONSTANT_QUALITY, items.get(0).quality);
     }
 
     @Test
@@ -92,8 +91,8 @@ public class ItemLifecycleUnitTest {
         var items = List.of(new Item(BACKSTAGE_PASSES_NAME, 11, QUALITY));
         var app = new ItemLifecycleUpdater();
 
-        List<AbstractItem> result =app.processDailyChange(items);
-        assertEquals(QUALITY + 1, result.get(0).getQuality());
+        app.processDailyChange(items);
+        assertEquals(QUALITY + 1, items.get(0).quality);
     }
 
     @Test
@@ -101,8 +100,8 @@ public class ItemLifecycleUnitTest {
         var items = List.of(new Item(BACKSTAGE_PASSES_NAME, 10, QUALITY));
         var app = new ItemLifecycleUpdater();
 
-        List<AbstractItem> result =app.processDailyChange(items);
-        assertEquals(QUALITY + 2, result.get(0).getQuality());
+        app.processDailyChange(items);
+        assertEquals(QUALITY + 2, items.get(0).quality);
     }
 
     @Test
@@ -110,8 +109,8 @@ public class ItemLifecycleUnitTest {
         var items = List.of(new Item(BACKSTAGE_PASSES_NAME, 5, QUALITY));
         var app = new ItemLifecycleUpdater();
 
-        List<AbstractItem> result =app.processDailyChange(items);
-        assertEquals(QUALITY + 3, result.get(0).getQuality());
+        app.processDailyChange(items);
+        assertEquals(QUALITY + 3, items.get(0).quality);
     }
 
     @Test
@@ -119,8 +118,8 @@ public class ItemLifecycleUnitTest {
         var items = List.of(new Item(BACKSTAGE_PASSES_NAME, 0, QUALITY));
         var app = new ItemLifecycleUpdater();
 
-        List<AbstractItem> result =app.processDailyChange(items);
-        assertEquals(0, result.get(0).getQuality());
+        app.processDailyChange(items);
+        assertEquals(0, items.get(0).quality);
     }
 
     @Test
@@ -128,8 +127,8 @@ public class ItemLifecycleUnitTest {
         var items = List.of(new Item(CONJURED_MANA_CAKE_NAME, SELL_IN, QUALITY));
         var app = new ItemLifecycleUpdater();
 
-        List<AbstractItem> result =app.processDailyChange(items);
-        assertEquals(QUALITY - 2, result.get(0).getQuality());
+        app.processDailyChange(items);
+        assertEquals(QUALITY - 2, items.get(0).quality);
     }
 
     @Test
@@ -137,8 +136,8 @@ public class ItemLifecycleUnitTest {
         var items = List.of(new Item(CONJURED_MANA_CAKE_NAME, 0, QUALITY));
         var app = new ItemLifecycleUpdater();
 
-        List<AbstractItem> result =app.processDailyChange(items);
-        assertEquals(QUALITY - 4, result.get(0).getQuality());
+        app.processDailyChange(items);
+        assertEquals(QUALITY - 4, items.get(0).quality);
     }
 
     @Test
